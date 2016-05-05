@@ -44,6 +44,7 @@ RUN apt-get update \
 RUN mv -v /usr/share/postgresql/$PG_MAJOR/postgresql.conf.sample /usr/share/postgresql/ \
 	&& ln -sv ../postgresql.conf.sample /usr/share/postgresql/$PG_MAJOR/ \
 	&& sed -ri "s!^#?(listen_addresses)\s*=\s*\S+.*!\1 = '*'!" /usr/share/postgresql/postgresql.conf.sample
+	&& sed -ri "s!^#?(max_connections)\s*=\s*\S+.*!\1 = '-1'!" /usr/share/postgresql/postgresql.conf.sample
 
 RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
